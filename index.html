@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Employee Performance Management System - a modern HR analytics dashboard." />
+  <title>Performly — Employee Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Performly home">
+        <span class="brand-mark"><i data-lucide="activity"></i></span>
+        <span>performly<span class="brand-dot">.</span><small>PEOPLE ANALYTICS</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="overview"><i data-lucide="layout-dashboard"></i><span>Overview</span></button>
+        <button class="nav-link" data-page="employees"><i data-lucide="users"></i><span>Employees</span><span class="nav-count" id="employeeNavCount">8</span></button>
+        <button class="nav-link" data-page="reviews"><i data-lucide="clipboard-check"></i><span>Performance reviews</span></button>
+        <button class="nav-link" data-page="goals"><i data-lucide="target"></i><span>Goals & OKRs</span></button>
+        <button class="nav-link" data-page="reports"><i data-lucide="chart-no-axes-combined"></i><span>Reports</span></button>
+      </nav>
+      <div class="workspace-label tools-label">MANAGE</div>
+      <nav class="nav-menu">
+        <button class="nav-link" data-page="settings"><i data-lucide="settings-2"></i><span>Settings</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon"><i data-lucide="sparkles"></i></span><strong>Make work better.</strong><p>Great teams grow with great feedback.</p><button id="tipsBtn">Explore tips <i data-lucide="arrow-up-right"></i></button></div>
+        <div class="profile-mini"><div class="avatar avatar-purple">AS</div><div><strong>Alex Morgan</strong><small>HR Administrator</small></div><button class="icon-button" title="Profile menu"><i data-lucide="chevrons-up-down"></i></button></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+        <div class="breadcrumbs"><span>Workspace</span><i data-lucide="chevron-right"></i><strong id="breadcrumbCurrent">Overview</strong></div>
+        <div class="top-actions">
+          <div class="search-box"><i data-lucide="search"></i><input id="globalSearch" type="search" placeholder="Search anything..." aria-label="Search employees" /></div>
+          <button class="icon-button notification-btn" id="notificationBtn" aria-label="Notifications"><i data-lucide="bell"></i><span></span></button>
+          <div class="top-avatar avatar avatar-purple">AS</div>
+        </div>
+      </header>
+
+      <section class="page active-page" id="page-overview">
+        <div class="page-heading">
+          <div><div class="eyebrow"><span class="eyebrow-dot"></span> PEOPLE OVERVIEW</div><h1>Good morning, Alex <span class="wave">✦</span></h1><p>Here’s what’s happening with your team today.</p></div>
+          <div class="heading-actions"><button class="btn btn-light" id="exportBtn"><i data-lucide="download"></i> Export report</button><button class="btn btn-primary" id="addEmployeeTop"><i data-lucide="plus"></i> Add employee</button></div>
+        </div>
+        <div class="notice-strip"><div class="notice-icon"><i data-lucide="calendar-check"></i></div><div><strong>Quarterly reviews are coming up!</strong><span>Make sure every team member has updated goals before the review cycle.</span></div><button id="reviewNoticeBtn">View reviews <i data-lucide="arrow-right"></i></button><button class="notice-close" id="dismissNotice" aria-label="Dismiss notice"><i data-lucide="x"></i></button></div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total employees</span><span class="stat-icon icon-blue"><i data-lucide="users"></i></span></div><div class="stat-value" id="totalEmployees">08</div><div class="stat-foot"><span class="trend positive"><i data-lucide="trending-up"></i> 12.5%</span><span>vs. last quarter</span></div><div class="stat-spark spark-blue"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Average performance</span><span class="stat-icon icon-violet"><i data-lucide="gauge"></i></span></div><div class="stat-value"><span id="avgPerformance">84.6</span><small>/100</small></div><div class="stat-foot"><span class="trend positive"><i data-lucide="trending-up"></i> 4.8%</span><span>vs. last quarter</span></div><div class="progress-line"><span id="avgProgress" style="width:84.6%"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Goals completed</span><span class="stat-icon icon-green"><i data-lucide="target"></i></span></div><div class="stat-value"><span id="goalCompletion">76</span><small>%</small></div><div class="stat-foot"><span class="trend positive"><i data-lucide="trending-up"></i> 8.2%</span><span>vs. last quarter</span></div><div class="progress-line green-line"><span style="width:76%"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Reviews pending</span><span class="stat-icon icon-orange"><i data-lucide="clock-3"></i></span></div><div class="stat-value" id="pendingReviews">03</div><div class="stat-foot"><span class="trend warning"><i data-lucide="alert-circle"></i> Needs attention</span><span>this week</span></div><div class="pending-avatars"><span class="avatar avatar-pink">JM</span><span class="avatar avatar-blue">RK</span><span class="avatar avatar-yellow">LT</span><span class="more-avatar">+0</span></div></article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel performance-panel"><div class="panel-header"><div><h2>Performance overview</h2><p>Team performance across the last 6 months</p></div><select id="chartRange" class="select-control" aria-label="Chart range"><option value="6">Last 6 months</option><option value="4">Last 4 months</option><option value="3">Last 3 months</option></select></div><div class="chart-legend"><span><i class="legend-dot purple-dot"></i> Performance score</span><span><i class="legend-dot mint-dot"></i> Goal completion</span></div><div class="chart-wrap"><canvas id="performanceChart" aria-label="Performance overview chart"></canvas></div></article>
+          <article class="panel distribution-panel"><div class="panel-header"><div><h2>Performance distribution</h2><p>How your team is doing</p></div><button class="icon-button subtle" title="More options"><i data-lucide="ellipsis"></i></button></div><div class="donut-wrap"><canvas id="distributionChart" aria-label="Performance distribution chart"></canvas><div class="donut-center"><strong id="highPerformers">4</strong><span>High performers</span></div></div><div class="distribution-legend"><div><span><i class="legend-dot purple-dot"></i> Excellent</span><strong id="excellentCount">4</strong></div><div><span><i class="legend-dot blue-dot"></i> Good</span><strong id="goodCount">3</strong></div><div><span><i class="legend-dot orange-dot"></i> Needs support</span><strong id="supportCount">1</strong></div></div></article>
+        </div>
+
+        <div class="bottom-grid">
+          <article class="panel team-panel"><div class="panel-header"><div><h2>Top performers</h2><p>Recognizing people doing great work</p></div><button class="text-button" data-goto="employees">View all <i data-lucide="arrow-up-right"></i></button></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>PERFORMANCE</th><th>STATUS</th></tr></thead><tbody id="topPerformersBody"></tbody></table></div></article>
+          <article class="panel activity-panel"><div class="panel-header"><div><h2>Recent activity</h2><p>Latest team updates</p></div><button class="icon-button subtle" title="Activity options"><i data-lucide="ellipsis"></i></button></div><div class="activity-list" id="activityList"></div></article>
+        </div>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+
+      <section class="page" id="page-employees">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PEOPLE</div><h1>Employee directory</h1><p>Manage your people and keep track of their growth.</p></div><button class="btn btn-primary" id="addEmployeeBtn"><i data-lucide="plus"></i> Add employee</button></div>
+        <div class="directory-toolbar"><div class="search-box directory-search"><i data-lucide="search"></i><input id="employeeSearch" type="search" placeholder="Search by name, role or department..." /></div><select id="departmentFilter" class="select-control"><option value="all">All departments</option><option>Engineering</option><option>Design</option><option>Marketing</option><option>Human Resources</option><option>Sales</option><option>Finance</option></select><select id="sortFilter" class="select-control"><option value="score">Sort: Performance</option><option value="name">Sort: Name A–Z</option><option value="department">Sort: Department</option></select></div>
+        <div class="employee-grid" id="employeeGrid"></div>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+
+      <section class="page" id="page-reviews">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> GROWTH & FEEDBACK</div><h1>Performance reviews</h1><p>Make feedback meaningful, consistent and actionable.</p></div><button class="btn btn-primary" id="newReviewBtn"><i data-lucide="plus"></i> New review</button></div>
+        <div class="review-summary"><div class="review-summary-card"><span class="stat-icon icon-violet"><i data-lucide="clipboard-check"></i></span><div><small>Review cycle</small><strong>Q4 · 2026</strong></div></div><div class="review-summary-card"><span class="stat-icon icon-green"><i data-lucide="check-circle-2"></i></span><div><small>Completed</small><strong>5 of 8</strong></div></div><div class="review-summary-card"><span class="stat-icon icon-orange"><i data-lucide="hourglass"></i></span><div><small>Pending</small><strong>3 reviews</strong></div></div></div>
+        <article class="panel reviews-panel"><div class="panel-header"><div><h2>Review tracker</h2><p>Review status for the current cycle</p></div><span class="pill pill-purple">Q4 Review Cycle</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>REVIEWER</th><th>DUE DATE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="reviewsBody"></tbody></table></div></article>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+
+      <section class="page" id="page-goals">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ALIGN & ACHIEVE</div><h1>Goals & OKRs</h1><p>Keep individual goals connected to what matters most.</p></div><button class="btn btn-primary" id="addGoalBtn"><i data-lucide="plus"></i> Add a goal</button></div>
+        <div class="goal-overview"><article class="panel goal-highlight"><div class="goal-orb"><i data-lucide="target"></i></div><div><span class="eyebrow">TEAM GOAL PROGRESS</span><h2>Big goals. Real progress.</h2><p>Your team has completed 76% of goals this quarter. Keep the momentum going.</p><div class="goal-progress"><span></span></div><small>76% completed <b>·</b> 24% in progress</small></div></article><article class="panel goal-stat"><span class="stat-icon icon-blue"><i data-lucide="flag"></i></span><small>Active goals</small><strong id="activeGoals">12</strong><span class="muted">Across all departments</span></article><article class="panel goal-stat"><span class="stat-icon icon-green"><i data-lucide="check-check"></i></span><small>Goals achieved</small><strong>19</strong><span class="muted">This quarter</span></article></div>
+        <div class="goal-list" id="goalList"></div>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> DATA & INSIGHTS</div><h1>Reports & insights</h1><p>Turn performance data into better team decisions.</p></div><button class="btn btn-primary" id="reportsExportBtn"><i data-lucide="download"></i> Download CSV</button></div>
+        <div class="report-cards"><article class="panel report-card"><span class="stat-icon icon-violet"><i data-lucide="trending-up"></i></span><small>Team average score</small><strong id="reportAvg">84.6<span>/100</span></strong><p><span class="trend positive">↑ 4.8%</span> from previous quarter</p></article><article class="panel report-card"><span class="stat-icon icon-green"><i data-lucide="trophy"></i></span><small>High performers</small><strong id="reportHigh">4</strong><p>Employees scoring 90 or above</p></article><article class="panel report-card"><span class="stat-icon icon-blue"><i data-lucide="users"></i></span><small>Departments</small><strong>6</strong><p>Working together to deliver results</p></article></div>
+        <article class="panel reports-chart-panel"><div class="panel-header"><div><h2>Department performance</h2><p>Average score by department</p></div></div><div class="chart-wrap report-chart-wrap"><canvas id="departmentChart"></canvas></div></article>
+        <article class="panel"><div class="panel-header"><div><h2>Employee performance data</h2><p>Export the current data for your presentation</p></div></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>ROLE</th><th>SCORE</th><th>GOALS</th></tr></thead><tbody id="reportsBody"></tbody></table></div></article>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> WORKSPACE</div><h1>Settings</h1><p>Customize your demo workspace preferences.</p></div></div>
+        <article class="panel settings-panel"><h2>Workspace preferences</h2><p>These settings are for this browser-based project demo.</p><label class="setting-row"><span><strong>Show welcome announcement</strong><small>Display the quarterly review reminder on overview.</small></span><input type="checkbox" id="announcementSetting" checked /></label><label class="setting-row"><span><strong>Compact employee cards</strong><small>Use a tighter layout in the employee directory.</small></span><input type="checkbox" id="compactSetting" /></label><div class="settings-actions"><button class="btn btn-primary" id="saveSettingsBtn">Save preferences</button><button class="btn btn-light" id="resetDataBtn">Reset demo data</button></div></article>
+        <div class="demo-note"><i data-lucide="info"></i><span><strong>Project demo note</strong> This version stores changes in your browser using localStorage. It is ideal for GitHub Pages and classroom demonstrations; it does not yet use a live server or secure user authentication.</span></div>
+        <footer class="footer"><span>© 2026 Performly. Built for better teams.</span><span><i data-lucide="shield-check"></i> Your workspace is up to date</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="employeeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form class="modal" id="employeeForm"><div class="modal-heading"><div><span class="eyebrow">TEAM DIRECTORY</span><h2 id="modalTitle">Add employee</h2><p>Add a team member to your workspace.</p></div><button type="button" class="icon-button" data-close="employeeModal" aria-label="Close"><i data-lucide="x"></i></button></div><input type="hidden" id="editEmployeeId" /><div class="form-grid"><label>Full name<input id="empName" required placeholder="e.g. Priya Sharma" /></label><label>Email address<input id="empEmail" type="email" required placeholder="name@company.com" /></label><label>Job title<input id="empRole" required placeholder="e.g. Product Designer" /></label><label>Department<select id="empDepartment" required><option>Engineering</option><option>Design</option><option>Marketing</option><option>Human Resources</option><option>Sales</option><option>Finance</option></select></label><label>Performance score (0–100)<input id="empScore" type="number" min="0" max="100" value="80" required /></label><label>Goals completed (%)<input id="empGoals" type="number" min="0" max="100" value="70" required /></label></div><div class="modal-actions"><button type="button" class="btn btn-light" data-close="employeeModal">Cancel</button><button type="submit" class="btn btn-primary"><i data-lucide="check"></i> Save employee</button></div></form>
+  </div>
+
+  <div class="modal-backdrop" id="goalModal" role="dialog" aria-modal="true" aria-labelledby="goalModalTitle">
+    <form class="modal small-modal" id="goalForm"><div class="modal-heading"><div><span class="eyebrow">TEAM OBJECTIVES</span><h2 id="goalModalTitle">Add a goal</h2><p>Give your team a clear target to work toward.</p></div><button type="button" class="icon-button" data-close="goalModal" aria-label="Close"><i data-lucide="x"></i></button></div><label>Goal title<input id="goalTitle" required placeholder="e.g. Improve customer satisfaction" /></label><label>Owner department<select id="goalDepartment"><option>Engineering</option><option>Design</option><option>Marketing</option><option>Human Resources</option><option>Sales</option><option>Finance</option></select></label><label>Progress (%)<input id="goalProgressInput" type="number" min="0" max="100" value="25" required /></label><div class="modal-actions"><button type="button" class="btn btn-light" data-close="goalModal">Cancel</button><button type="submit" class="btn btn-primary">Save goal</button></div></form>
+  </div>
+
+  <div class="toast" id="toast"><span class="toast-icon"><i data-lucide="check-circle-2"></i></span><span id="toastMessage">Changes saved</span></div>
+  <script src="script.js"></script>
+</body>
+</html>
