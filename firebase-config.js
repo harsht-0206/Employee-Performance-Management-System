@@ -5,12 +5,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyD9imYGyLP7Lh9wSRLyIsfitNYvPppX_yk",
+  authDomain: "employee-performance-b3037.firebaseapp.com",
+  projectId: "employee-performance-b3037",
+  storageBucket: "employee-performance-b3037.firebasestorage.app",
+  messagingSenderId: "948905991840",
+  appId: "1:948905991840:web:a4525494e22074ce63b3c5"
 };
 
 const app = initializeApp(firebaseConfig);
