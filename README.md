@@ -25,7 +25,7 @@ A responsive employee performance dashboard built with HTML, CSS and vanilla Jav
 3. Open **Settings → Pages**.
 4. Under **Build and deployment**, select **Deploy from a branch**.
 5. Select branch `main` and folder `/ (root)`, then click **Save**.
-6. Wait for GitHub to publish the site. The URL will look like `https://YOUR-USERNAME.github.io/REPOSITORY-NAME/`.
+6. Wait for GitHub to publish the site. The URL will look like `https://harsht0206.github.io/REPOSITORY-NAME/`.
 
 ## Important project note
 This is a front-end demo. Employee data is stored in the current browser using localStorage. It is not shared between different users/devices and does not include secure login or a backend database. Do not enter real employee personal data. A production version would need a backend API, database, authentication and authorization.
